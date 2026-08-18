@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Daluas - catalogos</title>
+  <title>Daluas | Catálogo</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -11,23 +11,20 @@
   <header class="site-header">
     <div class="topbar">
       <a class="brand" href="#" aria-label="Inicio">
-        <span class="brand-mark">D</span>
-        <span>
-          <strong>Daluas</strong>
-          <small>Boutique femenina</small>
-        </span>
+        <img src="assets/images/logo.png" alt="Daluas" class="logoDaluas">
       </a>
 
       <form class="search" id="searchForm">
         <label class="sr-only" for="searchInput">Buscar productos</label>
-        <input id="searchInput" type="search" placeholder="Buscar blusas, vestidos, rosa..." autocomplete="off">
+        <input id="searchInput" type="search" placeholder="Buscar producto" autocomplete="off">
         <button type="submit">Buscar</button>
       </form>
 
       <div class="account">
         <button class="account-button" id="accountButton" type="button">
-          <span class="avatar">RA</span>
-          <span class="account-text">Iniciar sesión</span>
+          <span class="avatar" aria-hidden="true">♙</span>
+          <span class="account-text">Entre o regístrese</span>
+          <span class="chevron" aria-hidden="true">⌄</span>
         </button>
         <div class="account-menu" id="accountMenu">
           <a href="#">Iniciar sesión</a>
@@ -42,7 +39,6 @@
     </div>
 
     <nav class="category-nav" aria-label="Categorías principales">
-      <button class="category-tab active" data-category="Todas">Todas</button>
       <button class="category-tab" data-category="Blusas">Blusas</button>
       <button class="category-tab" data-category="Pantalones">Pantalones</button>
       <button class="category-tab" data-category="Conjuntos">Conjuntos</button>
@@ -56,22 +52,33 @@
   <main>
     <section class="hero">
       <div class="hero-content">
-        <p>Colección primavera</p>
-        <h1>Prendas frescas para todos tus planes</h1>
-        <span>Blusas, conjuntos y vestidos seleccionados con promociones activas por temporada.</span>
-        <a href="#catalogo" class="hero-link">Ver novedades</a>
+        <h1>NUEVA TEMPORADA</h1>
+        <p>DALUAS</p>
+        <span>El comienzo de una estación más leve.</span>
       </div>
+      <div class="hero-polaroid" aria-hidden="true"></div>
     </section>
 
     <section class="catalog-layout" id="catalogo">
       <aside class="filters" id="filtersPanel" aria-label="Panel de filtros">
+        <label class="sort-control">
+          <span>Ordenar por:</span>
+          <select id="sortSelect">
+            <option value="relevance">Relevancia</option>
+            <option value="priceAsc">Precio de menor a mayor</option>
+            <option value="priceDesc">Precio de mayor a menor</option>
+            <option value="recent">Más recientes</option>
+            <option value="az">Nombre de A a Z</option>
+            <option value="za">Nombre de Z a A</option>
+          </select>
+        </label>
+
         <div class="filters-header">
-          <h2>Filtros</h2>
+          <h2>Categorías</h2>
           <button type="button" id="closeFilters" class="close-filters">Cerrar</button>
         </div>
 
         <div class="filter-group">
-          <label for="categorySearch">Categorías</label>
           <input class="small-input" id="categorySearch" type="search" placeholder="Buscar categoría">
           <div class="check-list" id="categoryChecks"></div>
         </div>
@@ -84,13 +91,15 @@
           </label>
         </div>
 
-        <div class="filter-group">
+        <div class="filter-group price-filter">
           <label>Precio</label>
-          <div class="price-row">
-            <input type="number" id="minPrice" min="0" value="0" aria-label="Precio mínimo">
-            <input type="number" id="maxPrice" min="0" value="180" aria-label="Precio máximo">
-          </div>
           <input type="range" id="priceRange" min="0" max="180" value="180">
+          <div class="price-row">
+            <span id="minPriceLabel">Bs. 0.00</span>
+            <span id="maxPriceLabel">Bs. 180.00</span>
+          </div>
+          <input class="visually-hidden-input" type="number" id="minPrice" min="0" value="0" aria-label="Precio mínimo">
+          <input class="visually-hidden-input" type="number" id="maxPrice" min="0" value="180" aria-label="Precio máximo">
         </div>
 
         <div class="filter-group inline-filter">
@@ -122,21 +131,8 @@
       <section class="product-area">
         <div class="catalog-toolbar">
           <div>
-            <p class="eyebrow">Catálogo digital</p>
-            <h2>Productos publicados</h2>
             <span id="resultCount">0 productos encontrados</span>
           </div>
-          <label class="sort-control">
-            Ordenar
-            <select id="sortSelect">
-              <option value="relevance">Relevancia</option>
-              <option value="priceAsc">Precio de menor a mayor</option>
-              <option value="priceDesc">Precio de mayor a menor</option>
-              <option value="recent">Más recientes</option>
-              <option value="az">Nombre de A a Z</option>
-              <option value="za">Nombre de Z a A</option>
-            </select>
-          </label>
         </div>
 
         <div class="active-tags" id="activeTags"></div>
@@ -148,26 +144,20 @@
       </section>
     </section>
 
-    <section class="admin-preview">
-      <div>
-        <p class="eyebrow">Panel administrativo</p>
-        <h2>Vista futura para gestionar el catálogo</h2>
-        <p>Este bloque muestra la estructura visual del panel: productos, categorías, marcas, tallas, colores, promociones y banner principal.</p>
-      </div>
-      <div class="admin-grid">
-        <article><strong>24</strong><span>Productos publicados</span></article>
-        <article><strong>7</strong><span>Categorías activas</span></article>
-        <article><strong>10</strong><span>Promociones</span></article>
-        <article><strong>1</strong><span>Banner principal</span></article>
-      </div>
-    </section>
   </main>
+
+  <footer class="site-footer">
+    © 2026 DALUAS · TODOS LOS DERECHOS RESERVADOS
+  </footer>
 
   <div class="modal" id="productModal" aria-hidden="true">
     <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <button class="modal-close" id="closeModal" type="button">Cerrar</button>
       <div class="modal-gallery">
+        <button class="gallery-control prev" id="prevImage" type="button" aria-label="Imagen anterior">‹</button>
         <img id="modalImage" src="" alt="">
+        <button class="gallery-control next" id="nextImage" type="button" aria-label="Imagen siguiente">›</button>
+        <span class="gallery-counter" id="galleryCounter">1 / 1</span>
       </div>
       <div class="modal-info">
         <p class="eyebrow" id="modalCategory"></p>
@@ -185,6 +175,6 @@
     </div>
   </div>
 
-  <script src="js/script.js"></script>
+  <script type="module" src="js/script.js"></script>
 </body>
 </html>
