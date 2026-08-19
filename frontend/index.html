@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daluas | Catálogo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="topbar">
+      <a class="brand" href="#" aria-label="Inicio">
+        <img src="assets/images/logo.png" alt="Daluas" class="logoDaluas">
+      </a>
+
+      <form class="search" id="searchForm">
+        <label class="sr-only" for="searchInput">Buscar productos</label>
+        <input id="searchInput" type="search" placeholder="Buscar producto" autocomplete="off">
+        <button type="submit">Buscar</button>
+      </form>
+
+      <div class="account">
+        <button class="account-button" id="accountButton" type="button">
+          <span class="avatar" aria-hidden="true">♙</span>
+          <span class="account-text">Entre o regístrese</span>
+          <span class="chevron" aria-hidden="true">⌄</span>
+        </button>
+        <div class="account-menu" id="accountMenu">
+          <a href="#">Iniciar sesión</a>
+          <a href="#">Registrarse</a>
+          <a href="#">Recuperar contraseña</a>
+          <a href="#">Mi cuenta</a>
+          <button type="button">Cerrar sesión</button>
+        </div>
+      </div>
+
+      <button class="mobile-filter-button" id="openFilters" type="button">Filtros</button>
+    </div>
+
+    <nav class="category-nav" aria-label="Categorías principales">
+      <button class="category-tab" data-category="Blusas">Blusas</button>
+      <button class="category-tab" data-category="Pantalones">Pantalones</button>
+      <button class="category-tab" data-category="Conjuntos">Conjuntos</button>
+      <button class="category-tab" data-category="Tops / Cropped">Tops / Cropped</button>
+      <button class="category-tab" data-category="Shorts / Faldas">Shorts / Faldas</button>
+      <button class="category-tab" data-category="Vestidos">Vestidos</button>
+      <button class="category-tab sale" data-category="Liquidación">Liquidación</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>NUEVA TEMPORADA</h1>
+        <p>DALUAS</p>
+        <span>El comienzo de una estación más leve.</span>
+      </div>
+      <div class="hero-polaroid" aria-hidden="true"></div>
+    </section>
+
+    <section class="catalog-layout" id="catalogo">
+      <aside class="filters" id="filtersPanel" aria-label="Panel de filtros">
+        <label class="sort-control">
+          <span>Ordenar por:</span>
+          <select id="sortSelect">
+            <option value="relevance">Relevancia</option>
+            <option value="priceAsc">Precio de menor a mayor</option>
+            <option value="priceDesc">Precio de mayor a menor</option>
+            <option value="recent">Más recientes</option>
+            <option value="az">Nombre de A a Z</option>
+            <option value="za">Nombre de Z a A</option>
+          </select>
+        </label>
+
+        <div class="filters-header">
+          <h2>Categorías</h2>
+          <button type="button" id="closeFilters" class="close-filters">Cerrar</button>
+        </div>
+
+        <div class="filter-group">
+          <input class="small-input" id="categorySearch" type="search" placeholder="Buscar categoría">
+          <div class="check-list" id="categoryChecks"></div>
+        </div>
+
+        <div class="filter-group inline-filter">
+          <span>Solo novedades</span>
+          <label class="switch">
+            <input type="checkbox" id="newOnly">
+            <span></span>
+          </label>
+        </div>
+
+        <div class="filter-group price-filter">
+          <label>Precio</label>
+          <input type="range" id="priceRange" min="0" max="180" value="180">
+          <div class="price-row">
+            <span id="minPriceLabel">Bs. 0.00</span>
+            <span id="maxPriceLabel">Bs. 180.00</span>
+          </div>
+          <input class="visually-hidden-input" type="number" id="minPrice" min="0" value="0" aria-label="Precio mínimo">
+          <input class="visually-hidden-input" type="number" id="maxPrice" min="0" value="180" aria-label="Precio máximo">
+        </div>
+
+        <div class="filter-group inline-filter">
+          <span>Solo promociones</span>
+          <label class="switch">
+            <input type="checkbox" id="promoOnly">
+            <span></span>
+          </label>
+        </div>
+
+        <details class="filter-group" open>
+          <summary>Marcas</summary>
+          <div class="check-list" id="brandChecks"></div>
+        </details>
+
+        <details class="filter-group" open>
+          <summary>Tallas</summary>
+          <div class="size-list" id="sizeChecks"></div>
+        </details>
+
+        <details class="filter-group" open>
+          <summary>Colores</summary>
+          <div class="color-list" id="colorChecks"></div>
+        </details>
+
+        <button class="clear-button" id="clearFilters" type="button">Limpiar filtros</button>
+      </aside>
+
+      <section class="product-area">
+        <div class="catalog-toolbar">
+          <div>
+            <span id="resultCount">0 productos encontrados</span>
+          </div>
+        </div>
+
+        <div class="active-tags" id="activeTags"></div>
+        <div class="products-grid" id="productsGrid"></div>
+        <div class="empty-state" id="emptyState">
+          <h3>No hay productos coincidentes</h3>
+          <p>Prueba quitando algún filtro o usando otra palabra de búsqueda.</p>
+        </div>
+      </section>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    © 2026 DALUAS · TODOS LOS DERECHOS RESERVADOS
+  </footer>
+
+  <div class="modal" id="productModal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="closeModal" type="button">Cerrar</button>
+      <div class="modal-gallery">
+        <button class="gallery-control prev" id="prevImage" type="button" aria-label="Imagen anterior">‹</button>
+        <img id="modalImage" src="" alt="">
+        <button class="gallery-control next" id="nextImage" type="button" aria-label="Imagen siguiente">›</button>
+        <span class="gallery-counter" id="galleryCounter">1 / 1</span>
+      </div>
+      <div class="modal-info">
+        <p class="eyebrow" id="modalCategory"></p>
+        <h2 id="modalTitle"></h2>
+        <div class="modal-price" id="modalPrice"></div>
+        <p id="modalDescription"></p>
+        <dl class="detail-list">
+          <div><dt>Marca</dt><dd id="modalBrand"></dd></div>
+          <div><dt>Estado</dt><dd id="modalStatus"></dd></div>
+          <div><dt>Tallas</dt><dd id="modalSizes"></dd></div>
+          <div><dt>Colores</dt><dd id="modalColors"></dd></div>
+        </dl>
+        <button class="contact-button" type="button">Consultar disponibilidad</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/script.js"></script>
+</body>
+</html>
